@@ -1,24 +1,99 @@
-# Compiled class file
+
+# =========================
+# Java Backend
+# =========================
+
+# Kompilierte Dateien
 *.class
 
-# Log file
+# Build-Verzeichnisse
+target/
+build/
+out/
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Maven
+# (target/ wird bereits oben ignoriert)
+
+# Logs
 *.log
+logs/
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# Java-Paketdateien
 *.jar
 *.war
-*.nar
 *.ear
-*.zip
-*.tar.gz
-*.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# =========================
+# React Frontend
+# =========================
+
+# Node.js Abhängigkeiten
+node_modules/
+
+# Build-Ausgaben
+dist/
+build/
+
+# React / Vite / Tests
+coverage/
+.nyc_output/
+
+# Temporäre Dateien
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Paketmanager-Cache
+.npm/
+.yarn/cache/
+
+# =========================
+# Umgebungsvariablen
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+# IDEs & Editoren
+# =========================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# =========================
+# Betriebssystem
+# =========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =========================
+# Temporäre Dateien
+# =========================
+
+*.tmp
+*.swp
+*.bak
