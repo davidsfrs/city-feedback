@@ -9,7 +9,7 @@ City-Feedback ist ein Online-Abstimmungssystem für Bürgerbefragungen.
 * [Grundlegende Git-Befehle](#grundlegende-git-befehle)
 * [Branches und ihre Nutzung, Umgang mit Merge-Konflikten](#branches-und-ihre-nutzung-umgang-mit-merge-konflikten)
 * [Git mit IntelliJ/PyCharm benutzen: Local Repository und Remote Repository](#git-mit-intellijpycharm-benutzen-local-repository-und-remote-repository)
-* [Nützliche Git-Tools und Plabormen](#nützliche-git-tools-und-plattformen)
+* [Nützliche Git-Tools und Plattformen](#nützliche-git-tools-und-plattformen)
 
 ### Was ist Git und warum sollte es verwendet werden?
 Git ist ein Versionskontrollsystem, das jede Änderung an Dateien oder Quellcode nachverfolgt, speichert und somit die Zusammenarbeit an Projekten erleichtert.
