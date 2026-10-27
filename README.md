@@ -27,5 +27,13 @@ Git ist ein Versionskontrollsystem, das jede Änderung an Dateien oder Quellcode
 
 IntelliJ IDEA und PyCharm sind Entwicklungsumgebungen von JetBrains, die Git direkt integrieren. Dadurch können Git-Befehle über die Benutzeroberfläche ausgeführt werden, ohne das Terminal verwenden zu müssen.
 
+**Local Repository**
+
+Ein lokales Repository befindet sich auf dem eigenen Computer und speichert die Versionshistorie des Projekts. Änderungen können somit auch ohne Internetverbindung gespeichert werden.
+
+- **Repository erstellen:** Projekt öffnen -> `VCS → Enable Version Control Integration → Git` (entspricht `git init`).
+- **Änderungen speichern:** Im Commit-Fenster die gewünschten Dateien auswählen, eine Commit-Nachricht eingeben und auf `Commit` klicken (entspricht `git add` und `git commit`).
+- **Versionshistorie anzeigen:** Über `Git → Log` können frühere Commits und Änderungen eingesehen werden.
+
 ### Nützliche Git-Tools und Plattformen
 ... *Cindy Bella*
