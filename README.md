@@ -53,3 +53,6 @@ Ein Remote Repository liegt auf einem externen Server, beispielsweise GitHub ode
 * **GitKraken:** Sehr visuelles und übersichtliches Tool für Windows, Mac und Linux. Bietet eine intuitive Darstellung von Branch-Bäumen und vereinfacht das Lösen von Merge-Konflikten.
 * **Sourcetree:** Ein kostenloses GUI-Tool von Atlassian, das eine einfache Verwaltung lokaler und remote Repositories ermöglicht.
 * **GitHub Desktop:** Ein Einsteiger-freundliches Tool, das sich auf die wesentlichen Git-Funktionen (Commit, Push, Pull, Branching) konzentriert.
+
+## Dokumentation der Zusammenarbeit
+* **Cindy Bella:** Erstellung des Abschnitts „Nützliche Git-Tools und Plattformen“ sowie Überarbeitung der Dokumentation.
