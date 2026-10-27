@@ -21,7 +21,16 @@ Git ist ein Versionskontrollsystem, das jede Änderung an Dateien oder Quellcode
 - ```git push```: Lädt deine lokalen Commits hoch auf das entfernte Server-Repository
 
 ### Branches und ihre Nutzung, Umgang mit Merge-Konflikten
-... *Michal Kress*
+Bei zwei Branches mit einem
+Mergekonflikt kann man 
+folgende Stelle manuell ausbessern
+
+1. <<<<HEAD Bereich>>> Branch name
+
+Der markierte Bereich, ist ein merge 
+e.g.: von einem Parallelentwickler,
+welcher entweder angenommen oder
+wegrationalisiert wird....
 
 ### Git mit IntelliJ/PyCharm benutzen: Local Repository und Remote Repository
 
