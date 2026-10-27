@@ -45,4 +45,6 @@ Ein Remote Repository liegt auf einem externen Server, beispielsweise GitHub ode
 - **Änderungen herunterladen:** Über `Git → Pull` werden Änderungen anderer Entwickler abgerufen und in den lokalen Branch integriert (entspricht `git pull`).
 
 ### Nützliche Git-Tools und Plattformen
-... *Cindy Bella*
+* **GitHub:** Die weltweit populärste Plattform für Open-Source- und Teamprojekte. Bietet Funktionen wie Pull Requests, Issue-Tracking und GitHub Actions (CI/CD).
+* **GitLab:** Eine webbasierte Plattform, die besonders stark auf integrierte DevOps-Pipelines (CI/CD) und Selbsthosting setzt.
+* **Bitbucket:** Wird häufig im Unternehmensumfeld eingesetzt und lässt sich nahtlos mit Atlassian-Tools wie Jira oder Confluence verbinden.
