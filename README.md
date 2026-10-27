@@ -30,7 +30,9 @@ folgende Stelle manuell ausbessern
 Der markierte Bereich, ist ein merge 
 e.g.: von einem Parallelentwickler,
 welcher entweder angenommen oder
-wegrationalisiert wird....
+wegrationalisiert wird und kommt vor
+wenn zwei Entwickler an ein
+und dem selben Branch arbeiten.
 
 ### Git mit IntelliJ/PyCharm benutzen: Local Repository und Remote Repository
 
