@@ -35,5 +35,14 @@ Ein lokales Repository befindet sich auf dem eigenen Computer und speichert die 
 - **Änderungen speichern:** Im Commit-Fenster die gewünschten Dateien auswählen, eine Commit-Nachricht eingeben und auf `Commit` klicken (entspricht `git add` und `git commit`).
 - **Versionshistorie anzeigen:** Über `Git → Log` können frühere Commits und Änderungen eingesehen werden.
 
+*Remote Repository**
+
+Ein Remote Repository liegt auf einem externen Server, beispielsweise GitHub oder GitLab. Es ermöglicht mehreren Entwicklern, gemeinsam an einem Projekt zu arbeiten und ihre Änderungen auszutauschen.
+
+- **Repository klonen:** Über `Git → Clone` oder `VCS → Get from Version Control` die URL des Remote Repositorys eingeben und das Projekt herunterladen (entspricht `git clone`).
+- **Repository verbinden:** Ein lokales Repository kann über `Git → Manage Remotes` mit einem Remote Repository verbunden werden (entspricht `git remote add origin`).
+- **Änderungen hochladen:** Über `Git → Push` werden lokale Commits an das Remote Repository übertragen (entspricht `git push`).
+- **Änderungen herunterladen:** Über `Git → Pull` werden Änderungen anderer Entwickler abgerufen und in den lokalen Branch integriert (entspricht `git pull`).
+
 ### Nützliche Git-Tools und Plattformen
 ... *Cindy Bella*
