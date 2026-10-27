@@ -48,3 +48,8 @@ Ein Remote Repository liegt auf einem externen Server, beispielsweise GitHub ode
 * **GitHub:** Die weltweit populärste Plattform für Open-Source- und Teamprojekte. Bietet Funktionen wie Pull Requests, Issue-Tracking und GitHub Actions (CI/CD).
 * **GitLab:** Eine webbasierte Plattform, die besonders stark auf integrierte DevOps-Pipelines (CI/CD) und Selbsthosting setzt.
 * **Bitbucket:** Wird häufig im Unternehmensumfeld eingesetzt und lässt sich nahtlos mit Atlassian-Tools wie Jira oder Confluence verbinden.
+
+### Grafische Benutzeroberflächen (GUI-Tools)
+* **GitKraken:** Sehr visuelles und übersichtliches Tool für Windows, Mac und Linux. Bietet eine intuitive Darstellung von Branch-Bäumen und vereinfacht das Lösen von Merge-Konflikten.
+* **Sourcetree:** Ein kostenloses GUI-Tool von Atlassian, das eine einfache Verwaltung lokaler und remote Repositories ermöglicht.
+* **GitHub Desktop:** Ein Einsteiger-freundliches Tool, das sich auf die wesentlichen Git-Funktionen (Commit, Push, Pull, Branching) konzentriert.
