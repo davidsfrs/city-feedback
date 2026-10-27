@@ -24,7 +24,8 @@ Git ist ein Versionskontrollsystem, das jede Änderung an Dateien oder Quellcode
 ... *Michal Kress*
 
 ### Git mit IntelliJ/PyCharm benutzen: Local Repository und Remote Repository
-... *Torben Jost*
+
+IntelliJ IDEA und PyCharm sind Entwicklungsumgebungen von JetBrains, die Git direkt integrieren. Dadurch können Git-Befehle über die Benutzeroberfläche ausgeführt werden, ohne das Terminal verwenden zu müssen.
 
 ### Nützliche Git-Tools und Plattformen
 ... *Cindy Bella*
