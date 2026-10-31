@@ -15,6 +15,7 @@ City-Feedback ist ein Online-Abstimmungssystem für Bürgerbefragungen.
     - [Remote Repository](#remote-repository)
   - [1.5 Nützliche Git-Tools & Plattformen](#15-nützliche-git-tools--plattformen)
   - [1.6 Dokumentation der Zusammenarbeit](#16-dokumentation-der-zusammenarbeit)
+- [2. CI/CD](#2-cicd)
 
 ---
 
@@ -134,3 +135,22 @@ Die Erstellung und Überarbeitung dieses Handouts wurde von folgenden Personen �
 | Michael Kress | Branches, ihre Verwendung und der Umgang mit Merge-Konflikten |
 | Torben Jost | Verwendung von Git mit IntelliJ IDEA und PyCharm, Local und Remote Repository |
 | Cindy Bella | Nützliche Git-Tools und Plattformen sowie Überarbeitung der Dokumentation |
+
+---
+
+# 2. CI/CD
+
+CityFeedback verwendet GitHub Actions zur Continuous Integration.
+Bei jedem Push und bei Pull Requests nach `main` werden Backend und Frontend automatisch geprüft.
+
+### Warum GitHub Actions?
+Das Repository liegt bereits auf GitHub. GitHub Actions ist deshalb eine naheliegende Wahl: Die Workflow-Dateien liegen direkt im Repository, Commits und Pull Requests können automatisch geprüft werden, und die Ergebnisse sind auf GitHub sichtbar. Man benötigst für den Einstieg weder einen eigenen Jenkins-Server noch eine separate CI-Plattform.
+
+### Pipeline
+- Backend: Java 21, Maven, automatisierte Tests und Build
+- Frontend: Node.js, npm und Produktions-Build
+- Fehlerhafte Prüfungen führen zu einem fehlgeschlagenen Workflow.
+
+### Deployment
+Ein automatisches Deployment ist für eine spätere Projektphase
+vorgesehen. Die aktuelle Pipeline führt noch kein Deployment aus.
