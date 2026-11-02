@@ -151,6 +151,12 @@ Das Repository liegt bereits auf GitHub. GitHub Actions ist deshalb eine nahelie
 - Frontend: Node.js, npm und Produktions-Build
 - Fehlerhafte Prüfungen führen zu einem fehlgeschlagenen Workflow.
 
+### Tests
+Es werden folgende Tests durchgeführt:
+- **BackendApplicationTests:** Testet, ob die Spring-Boot-Anwendung erfolgreich startet.
+- **FeedbackTest:** Testet, ob ein Feedback-Objekt korrekt erstellt wird.
+- **FeedbackValidationTest:** Testet, ob die Validierung einen leeren Titel zurückweist.
+
 ### Deployment
 Ein automatisches Deployment ist für eine spätere Projektphase
 vorgesehen. Die aktuelle Pipeline führt noch kein Deployment aus.
