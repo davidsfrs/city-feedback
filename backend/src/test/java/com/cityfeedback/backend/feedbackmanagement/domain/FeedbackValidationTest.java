@@ -1,4 +1,4 @@
-package com.cityfeedback.backend.model;
+package com.cityfeedback.backend.feedbackmanagement.domain;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
