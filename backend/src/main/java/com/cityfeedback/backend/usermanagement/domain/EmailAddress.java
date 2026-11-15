@@ -12,10 +12,19 @@ public record EmailAddress(String value) {
     );
 
     public EmailAddress {
-        if (value == null || !EMAIL_PATTERN.matcher(value).matches()) {
-            throw new IllegalArgumentException("Invalid email address");
+        if (value == null) {
+            throw new IllegalArgumentException(
+                    "Email address must not be null"
+            );
         }
 
-        value = value.toLowerCase(Locale.ROOT);
+        value = value.strip().toLowerCase(Locale.ROOT);
+
+        if (!EMAIL_PATTERN.matcher(value).matches()
+                || value.contains("..")) {
+            throw new IllegalArgumentException(
+                    "Invalid email address"
+            );
+        }
     }
 }

@@ -97,4 +97,12 @@ class InMemoryUserRepositoryTest {
                 repository.findById(user.getId()).orElseThrow().getFirstName()
         );
     }
+
+    @Test
+    void shouldRejectNullUser() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> repository.save(null)
+        );
+    }
 }

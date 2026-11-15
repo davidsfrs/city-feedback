@@ -199,4 +199,29 @@ class UserServiceTest {
                 userService.login("max@example.com", " ")
         );
     }
+
+    @Test
+    void shouldReturnSameErrorForInactiveAccount() {
+        User user = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "max@example.com",
+                "securePassword123"
+        );
+
+        userService.deactivateUser(user.getId());
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> userService.login(
+                        "max@example.com",
+                        "securePassword123"
+                )
+        );
+
+        assertEquals(
+                "Invalid email or password",
+                exception.getMessage()
+        );
+    }
 }

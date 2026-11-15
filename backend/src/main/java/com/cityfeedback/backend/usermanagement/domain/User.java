@@ -40,8 +40,8 @@ public class User {
         }
 
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = firstName.trim();
+        this.lastName = lastName.trim();
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;

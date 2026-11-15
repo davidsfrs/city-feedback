@@ -16,6 +16,12 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public void save(User user) {
 
+        if (user == null) {
+            throw new IllegalArgumentException(
+                    "User must not be null"
+            );
+        }
+
         boolean emailAlreadyExists = users.values()
                 .stream()
                 .anyMatch(existingUser ->

@@ -75,13 +75,13 @@ public class UserService {
                         )
                 );
 
-        if (user.getAccountStatus() != AccountStatus.ACTIVE) {
-            throw new IllegalArgumentException(
-                    "Account is inactive"
-            );
-        }
+        boolean passwordMatches = passwordHasher.matches(
+                rawPassword,
+                user.getPasswordHash()
+        );
 
-        if (!passwordHasher.matches(rawPassword, user.getPasswordHash())) {
+        if (!passwordMatches
+                || user.getAccountStatus() != AccountStatus.ACTIVE) {
             throw new IllegalArgumentException(
                     "Invalid email or password"
             );

@@ -159,4 +159,19 @@ class UserTest {
                 )
         );
     }
+
+    @Test
+    void shouldTrimWhitespaceFromNames() {
+        User user = new User(
+                UUID.randomUUID(),
+                " Max ",
+                " Mustermann ",
+                new EmailAddress("max@example.com"),
+                "hashed-password",
+                UserRole.CITIZEN
+        );
+
+        assertEquals("Max", user.getFirstName());
+        assertEquals("Mustermann", user.getLastName());
+    }
 }

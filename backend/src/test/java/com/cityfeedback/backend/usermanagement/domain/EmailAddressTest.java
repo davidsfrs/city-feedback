@@ -98,4 +98,21 @@ class EmailAddressTest {
 
         assertEquals(first.hashCode(), second.hashCode());
     }
+
+    @Test
+    void shouldTrimWhitespaceFromEmail() {
+        EmailAddress email = new EmailAddress(
+                "  Max@Example.com  "
+        );
+
+        assertEquals("max@example.com", email.value());
+    }
+
+    @Test
+    void shouldRejectConsecutiveDots() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new EmailAddress("max..test@example.com")
+        );
+    }
 }
