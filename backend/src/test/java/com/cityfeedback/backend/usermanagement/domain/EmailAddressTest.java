@@ -14,7 +14,7 @@ class EmailAddressTest {
         EmailAddress email =
                 new EmailAddress("max@example.com");
 
-        assertEquals("max@example.com", email.getValue());
+        assertEquals("max@example.com", email.value());
     }
 
     @Test
@@ -22,7 +22,7 @@ class EmailAddressTest {
         EmailAddress email =
                 new EmailAddress("Max@Example.com");
 
-        assertEquals("max@example.com", email.getValue());
+        assertEquals("max@example.com", email.value());
     }
 
     // Negative Tests
@@ -81,5 +81,21 @@ class EmailAddressTest {
     void shouldRejectEmailContainingWhitespace() {
         assertThrows(IllegalArgumentException.class,
                 () -> new EmailAddress("max mustermann@example.com"));
+    }
+
+    @Test
+    void shouldConsiderEqualEmailAddressesAsEqual() {
+        EmailAddress first = new EmailAddress("max@example.com");
+        EmailAddress second = new EmailAddress("max@example.com");
+
+        assertEquals(first, second);
+    }
+
+    @Test
+    void shouldHaveSameHashCodeForEqualEmailAddresses() {
+        EmailAddress first = new EmailAddress("max@example.com");
+        EmailAddress second = new EmailAddress("max@example.com");
+
+        assertEquals(first.hashCode(), second.hashCode());
     }
 }
