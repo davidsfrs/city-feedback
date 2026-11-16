@@ -5,9 +5,11 @@ import com.cityfeedback.backend.usermanagement.domain.User;
 import com.cityfeedback.backend.usermanagement.domain.UserRepository;
 import com.cityfeedback.backend.usermanagement.domain.UserRole;
 import com.cityfeedback.backend.usermanagement.domain.AccountStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;

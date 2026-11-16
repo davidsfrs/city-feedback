@@ -3,12 +3,13 @@ package com.cityfeedback.backend.usermanagement.infrastructure;
 import com.cityfeedback.backend.usermanagement.domain.EmailAddress;
 import com.cityfeedback.backend.usermanagement.domain.User;
 import com.cityfeedback.backend.usermanagement.domain.UserRepository;
-
+import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class InMemoryUserRepository implements UserRepository {
 
     private final Map<UUID, User> users = new HashMap<>();
