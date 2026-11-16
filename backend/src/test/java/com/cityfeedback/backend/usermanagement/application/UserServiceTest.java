@@ -1,7 +1,10 @@
 package com.cityfeedback.backend.usermanagement.application;
 
+import com.cityfeedback.backend.usermanagement.application.exception.EmailAlreadyRegisteredException;
+import com.cityfeedback.backend.usermanagement.application.exception.InvalidCredentialsException;
+import com.cityfeedback.backend.usermanagement.application.exception.UserNotFoundException;
 import com.cityfeedback.backend.usermanagement.domain.*;
-import com.cityfeedback.backend.usermanagement.infrastructure.InMemoryUserRepository;
+import com.cityfeedback.backend.usermanagement.infrastructure.persistence.InMemoryUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.UUID;
@@ -278,5 +281,44 @@ class UserServiceTest {
         assertEquals(2, users.size());
         assertTrue(users.contains(firstUser));
         assertTrue(users.contains(secondUser));
+    }
+
+    @Test
+    void shouldFindUserByEmail() {
+        User registeredUser = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "max.find@example.com",
+                "password123"
+        );
+
+        User foundUser = userService.findByEmail(
+                "max.find@example.com"
+        );
+
+        assertEquals(registeredUser.getId(), foundUser.getId());
+    }
+
+    @Test
+    void shouldUpdateOwnName() {
+        User user = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "max.service-update@example.com",
+                "password123"
+        );
+
+        userService.updateOwnName(
+                user.getId(),
+                "Maximilian",
+                "Muster"
+        );
+
+        User updatedUser = repository
+                .findById(user.getId())
+                .orElseThrow();
+
+        assertEquals("Maximilian", updatedUser.getFirstName());
+        assertEquals("Muster", updatedUser.getLastName());
     }
 }

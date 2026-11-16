@@ -1,4 +1,4 @@
-package com.cityfeedback.backend.usermanagement.infrastructure;
+package com.cityfeedback.backend.usermanagement.infrastructure.persistence;
 
 import com.cityfeedback.backend.usermanagement.domain.*;
 import org.junit.jupiter.api.BeforeEach;

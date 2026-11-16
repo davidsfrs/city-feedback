@@ -1,5 +1,8 @@
 package com.cityfeedback.backend.usermanagement.application;
 
+import com.cityfeedback.backend.usermanagement.application.exception.EmailAlreadyRegisteredException;
+import com.cityfeedback.backend.usermanagement.application.exception.InvalidCredentialsException;
+import com.cityfeedback.backend.usermanagement.application.exception.UserNotFoundException;
 import com.cityfeedback.backend.usermanagement.domain.EmailAddress;
 import com.cityfeedback.backend.usermanagement.domain.User;
 import com.cityfeedback.backend.usermanagement.domain.UserRepository;
@@ -114,5 +117,21 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public User findByEmail(String email) {
+        EmailAddress emailAddress = new EmailAddress(email);
+
+        return userRepository.findByEmail(emailAddress)
+                .orElseThrow(UserNotFoundException::new);
+    }
+
+    public void updateOwnName(UUID userId, String firstName, String lastName) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+
+        user.updateName(firstName, lastName);
+
+        userRepository.save(user);
     }
 }

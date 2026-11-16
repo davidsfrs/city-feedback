@@ -186,4 +186,118 @@ class AdminUserControllerTest {
         mockMvc.perform(get("/api/admin/users"))
                 .andExpect(status().isUnauthorized());
     }
+
+    @Test
+    void shouldAllowAdminToDeactivateUser() throws Exception {
+        User citizen = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "deactivate-target@example.com",
+                "securePassword123"
+        );
+
+        User admin = userService.registerCitizen(
+                "Admin",
+                "User",
+                "deactivate-admin@example.com",
+                "securePassword123"
+        );
+
+        userService.changeUserRole(admin.getId(), UserRole.ADMIN);
+
+        String token = jwtService.generateToken(
+                admin.getEmail().value(),
+                UserRole.ADMIN
+        );
+
+        mockMvc.perform(patch(
+                        "/api/admin/users/" + citizen.getId() + "/deactivate")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void shouldAllowAdminToActivateUser() throws Exception {
+        User citizen = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "activate-target@example.com",
+                "securePassword123"
+        );
+
+        userService.deactivateUser(citizen.getId());
+
+        User admin = userService.registerCitizen(
+                "Admin",
+                "User",
+                "activate-admin@example.com",
+                "securePassword123"
+        );
+
+        userService.changeUserRole(admin.getId(), UserRole.ADMIN);
+
+        String token = jwtService.generateToken(
+                admin.getEmail().value(),
+                UserRole.ADMIN
+        );
+
+        mockMvc.perform(patch(
+                        "/api/admin/users/" + citizen.getId() + "/activate")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void shouldForbidCitizenFromDeactivatingUser() throws Exception {
+        User citizen = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "deactivate-forbidden@example.com",
+                "securePassword123"
+        );
+
+        User target = userService.registerCitizen(
+                "Lisa",
+                "Musterfrau",
+                "deactivate-target-citizen@example.com",
+                "securePassword123"
+        );
+
+        String token = jwtService.generateToken(
+                citizen.getEmail().value(),
+                citizen.getRole()
+        );
+
+        mockMvc.perform(patch(
+                        "/api/admin/users/" + target.getId() + "/deactivate")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void shouldForbidCitizenFromActivatingUser() throws Exception {
+        User citizen = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "activate-forbidden-citizen@example.com",
+                "securePassword123"
+        );
+
+        User target = userService.registerCitizen(
+                "Lisa",
+                "Musterfrau",
+                "activate-forbidden-target@example.com",
+                "securePassword123"
+        );
+
+        String token = jwtService.generateToken(
+                citizen.getEmail().value(),
+                citizen.getRole()
+        );
+
+        mockMvc.perform(patch(
+                        "/api/admin/users/" + target.getId() + "/activate")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isForbidden());
+    }
 }

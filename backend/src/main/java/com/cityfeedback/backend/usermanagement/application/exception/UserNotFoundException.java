@@ -1,4 +1,4 @@
-package com.cityfeedback.backend.usermanagement.application;
+package com.cityfeedback.backend.usermanagement.application.exception;
 
 public class UserNotFoundException extends RuntimeException {
 

@@ -1,4 +1,3 @@
-
 package com.cityfeedback.backend.usermanagement.infrastructure.web;
 
 import org.junit.jupiter.api.Test;

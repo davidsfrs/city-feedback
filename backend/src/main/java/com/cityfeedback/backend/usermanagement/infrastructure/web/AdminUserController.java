@@ -36,4 +36,16 @@ public class AdminUserController {
                 .map(UserResponse::from)
                 .toList();
     }
+
+    @PatchMapping("/{userId}/deactivate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deactivateUser(@PathVariable UUID userId) {
+        userService.deactivateUser(userId);
+    }
+
+    @PatchMapping("/{userId}/activate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void activateUser(@PathVariable UUID userId) {
+        userService.activateUser(userId);
+    }
 }

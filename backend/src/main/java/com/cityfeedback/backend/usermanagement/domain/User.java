@@ -5,8 +5,8 @@ import java.util.UUID;
 public class User {
 
     private final UUID id;
-    private final String firstName;
-    private final String lastName;
+    private String firstName;
+    private String lastName;
     private final EmailAddress email;
     private final String passwordHash;
     private UserRole role;
@@ -90,5 +90,18 @@ public class User {
         }
 
         this.role = newRole;
+    }
+
+    public void updateName(String firstName, String lastName) {
+        if (firstName == null || firstName.isBlank()) {
+            throw new IllegalArgumentException("First name cannot be blank");
+        }
+
+        if (lastName == null || lastName.isBlank()) {
+            throw new IllegalArgumentException("Last name cannot be blank");
+        }
+
+        this.firstName = firstName.trim();
+        this.lastName = lastName.trim();
     }
 }
