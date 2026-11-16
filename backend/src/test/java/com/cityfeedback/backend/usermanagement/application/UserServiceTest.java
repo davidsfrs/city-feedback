@@ -65,7 +65,7 @@ class UserServiceTest {
                 "securePassword123"
         );
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(EmailAlreadyRegisteredException.class, () ->
                 userService.registerCitizen(
                         "Anna",
                         "Musterfrau",
@@ -105,7 +105,7 @@ class UserServiceTest {
     void shouldThrowExceptionWhenDeactivatingUnknownUser() {
         UUID unknownUserId = UUID.randomUUID();
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UserNotFoundException.class, () ->
                 userService.deactivateUser(unknownUserId)
         );
     }
@@ -130,7 +130,7 @@ class UserServiceTest {
     void shouldThrowExceptionWhenActivatingUnknownUser() {
         UUID unknownUserId = UUID.randomUUID();
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UserNotFoundException.class, () ->
                 userService.activateUser(unknownUserId)
         );
     }
@@ -162,14 +162,14 @@ class UserServiceTest {
                 "securePassword123"
         );
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(InvalidCredentialsException.class, () ->
                 userService.login("max@example.com", "wrongPassword")
         );
     }
 
     @Test
     void shouldRejectLoginForUnknownEmail() {
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(InvalidCredentialsException.class, () ->
                 userService.login("unknown@example.com", "somePassword")
         );
     }
@@ -185,7 +185,7 @@ class UserServiceTest {
 
         userService.deactivateUser(user.getId());
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(InvalidCredentialsException.class, () ->
                 userService.login(
                         "max@example.com",
                         "securePassword123"
@@ -211,8 +211,8 @@ class UserServiceTest {
 
         userService.deactivateUser(user.getId());
 
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
+        InvalidCredentialsException exception = assertThrows(
+                InvalidCredentialsException.class,
                 () -> userService.login(
                         "max@example.com",
                         "securePassword123"
@@ -223,5 +223,60 @@ class UserServiceTest {
                 "Invalid email or password",
                 exception.getMessage()
         );
+    }
+
+    @Test
+    void shouldChangeUserRoleSuccessfully() {
+        User user = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "max@example.com",
+                "securePassword123"
+        );
+
+        userService.changeUserRole(user.getId(), UserRole.STAFF);
+
+        assertEquals(UserRole.STAFF, user.getRole());
+
+        User updatedUser = repository.findById(user.getId())
+                .orElseThrow();
+
+        assertEquals(UserRole.STAFF, updatedUser.getRole());
+    }
+
+    @Test
+    void shouldRejectRoleChangeForUnknownUser() {
+        UUID unknownUserId = UUID.randomUUID();
+
+        assertThrows(
+                UserNotFoundException.class,
+                () -> userService.changeUserRole(
+                        unknownUserId,
+                        UserRole.STAFF
+                )
+        );
+    }
+
+    @Test
+    void shouldReturnAllRegisteredUsers() {
+        User firstUser = userService.registerCitizen(
+                "Max",
+                "Mustermann",
+                "max@example.com",
+                "securePassword123"
+        );
+
+        User secondUser = userService.registerCitizen(
+                "Lisa",
+                "Musterfrau",
+                "lisa@example.com",
+                "securePassword123"
+        );
+
+        var users = userService.getAllUsers();
+
+        assertEquals(2, users.size());
+        assertTrue(users.contains(firstUser));
+        assertTrue(users.contains(secondUser));
     }
 }

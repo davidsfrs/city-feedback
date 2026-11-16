@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
 @Repository
 public class InMemoryUserRepository implements UserRepository {
@@ -57,5 +58,10 @@ public class InMemoryUserRepository implements UserRepository {
         return users.values()
                 .stream()
                 .anyMatch(user -> user.getEmail().equals(email));
+    }
+
+    @Override
+    public List<User> findAll() {
+        return List.copyOf(users.values());
     }
 }

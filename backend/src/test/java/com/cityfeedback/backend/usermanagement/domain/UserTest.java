@@ -174,4 +174,37 @@ class UserTest {
         assertEquals("Max", user.getFirstName());
         assertEquals("Mustermann", user.getLastName());
     }
+
+    @Test
+    void shouldChangeUserRole() {
+        User user = new User(
+                UUID.randomUUID(),
+                "Max",
+                "Mustermann",
+                new EmailAddress("max@example.com"),
+                "hashed-password",
+                UserRole.CITIZEN
+        );
+
+        user.changeRole(UserRole.STAFF);
+
+        assertEquals(UserRole.STAFF, user.getRole());
+    }
+
+    @Test
+    void shouldRejectNullRoleWhenChangingRole() {
+        User user = new User(
+                UUID.randomUUID(),
+                "Max",
+                "Mustermann",
+                new EmailAddress("max@example.com"),
+                "hashed-password",
+                UserRole.CITIZEN
+        );
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> user.changeRole(null)
+        );
+    }
 }

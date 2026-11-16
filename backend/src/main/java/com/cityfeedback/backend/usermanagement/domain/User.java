@@ -9,7 +9,7 @@ public class User {
     private final String lastName;
     private final EmailAddress email;
     private final String passwordHash;
-    private final UserRole role;
+    private UserRole role;
     private AccountStatus accountStatus;
 
     public User(
@@ -82,5 +82,13 @@ public class User {
 
     public void activate() {
         this.accountStatus = AccountStatus.ACTIVE;
+    }
+
+    public void changeRole(UserRole newRole) {
+        if (newRole == null) {
+            throw new IllegalArgumentException("Role must not be null");
+        }
+
+        this.role = newRole;
     }
 }

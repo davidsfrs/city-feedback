@@ -8,6 +8,7 @@ import com.cityfeedback.backend.usermanagement.domain.AccountStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -38,9 +39,7 @@ public class UserService {
         EmailAddress emailAddress = new EmailAddress(email);
 
         if (userRepository.existsByEmail(emailAddress)) {
-            throw new IllegalArgumentException(
-                    "Email address is already registered"
-            );
+            throw new EmailAlreadyRegisteredException();
         }
 
         String passwordHash = passwordHasher.hash(rawPassword);
@@ -71,11 +70,7 @@ public class UserService {
         EmailAddress emailAddress = new EmailAddress(email);
 
         User user = userRepository.findByEmail(emailAddress)
-                .orElseThrow(() ->
-                        new IllegalArgumentException(
-                                "Invalid email or password"
-                        )
-                );
+                .orElseThrow(InvalidCredentialsException::new);
 
         boolean passwordMatches = passwordHasher.matches(
                 rawPassword,
@@ -84,9 +79,7 @@ public class UserService {
 
         if (!passwordMatches
                 || user.getAccountStatus() != AccountStatus.ACTIVE) {
-            throw new IllegalArgumentException(
-                    "Invalid email or password"
-            );
+            throw new InvalidCredentialsException();
         }
 
         return user;
@@ -94,9 +87,7 @@ public class UserService {
 
     public void deactivateUser(UUID userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("User not found")
-                );
+                .orElseThrow(UserNotFoundException::new);
 
         user.deactivate();
 
@@ -105,12 +96,23 @@ public class UserService {
 
     public void activateUser(UUID userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("User not found")
-                );
+                .orElseThrow(UserNotFoundException::new);
 
         user.activate();
 
         userRepository.save(user);
+    }
+
+    public void changeUserRole(UUID userId, UserRole newRole) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+
+        user.changeRole(newRole);
+
+        userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
