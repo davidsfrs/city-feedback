@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FeedbackTest {
 
+    // Nur ein Beispiel
     @Test
     void shouldCreateFeedbackCorrectly() {
         Feedback feedback = new Feedback(
