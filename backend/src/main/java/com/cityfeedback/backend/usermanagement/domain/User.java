@@ -40,8 +40,8 @@ public class User {
         }
 
         this.id = id;
-        this.firstName = firstName.trim();
-        this.lastName = lastName.trim();
+        this.firstName = validateName(firstName, "First name");
+        this.lastName = validateName(lastName, "Last name");
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
@@ -93,15 +93,20 @@ public class User {
     }
 
     public void updateName(String firstName, String lastName) {
-        if (firstName == null || firstName.isBlank()) {
-            throw new IllegalArgumentException("First name cannot be blank");
+        String validatedFirstName = validateName(firstName, "First name");
+        String validatedLastName = validateName(lastName, "Last name");
+
+        this.firstName = validatedFirstName;
+        this.lastName = validatedLastName;
+    }
+
+    private String validateName(String name, String fieldName) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException(
+                    fieldName + " must not be empty"
+            );
         }
 
-        if (lastName == null || lastName.isBlank()) {
-            throw new IllegalArgumentException("Last name cannot be blank");
-        }
-
-        this.firstName = firstName.trim();
-        this.lastName = lastName.trim();
+        return name.trim();
     }
 }

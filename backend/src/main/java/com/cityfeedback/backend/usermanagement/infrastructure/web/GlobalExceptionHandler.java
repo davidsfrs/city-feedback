@@ -1,12 +1,13 @@
 package com.cityfeedback.backend.usermanagement.infrastructure.web;
 
+import com.cityfeedback.backend.usermanagement.application.exception.EmailAlreadyRegisteredException;
 import com.cityfeedback.backend.usermanagement.application.exception.InvalidCredentialsException;
 import com.cityfeedback.backend.usermanagement.application.exception.UserNotFoundException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import com.cityfeedback.backend.usermanagement.application.exception.EmailAlreadyRegisteredException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

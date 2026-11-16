@@ -89,8 +89,7 @@ public class UserService {
     }
 
     public void deactivateUser(UUID userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
+        User user = findUserOrThrow(userId);
 
         user.deactivate();
 
@@ -98,8 +97,7 @@ public class UserService {
     }
 
     public void activateUser(UUID userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
+        User user = findUserOrThrow(userId);
 
         user.activate();
 
@@ -107,8 +105,7 @@ public class UserService {
     }
 
     public void changeUserRole(UUID userId, UserRole newRole) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
+        User user = findUserOrThrow(userId);
 
         user.changeRole(newRole);
 
@@ -127,11 +124,15 @@ public class UserService {
     }
 
     public void updateOwnName(UUID userId, String firstName, String lastName) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
+        User user = findUserOrThrow(userId);
 
         user.updateName(firstName, lastName);
 
         userRepository.save(user);
+    }
+
+    private User findUserOrThrow(UUID userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
     }
 }
