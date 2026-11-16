@@ -1,4 +1,3 @@
-
 name: CityFeedback CI
 
 on:
@@ -14,6 +13,9 @@ jobs:
   backend:
     name: Backend - Build und Tests
     runs-on: ubuntu-latest
+
+    env:
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
     steps:
       - name: Repository auschecken
