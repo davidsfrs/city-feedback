@@ -2,6 +2,8 @@ package com.cityfeedback.backend.feedbackmanagement.domain;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.UUID;
+
 public class Feedback {
 
     @NotBlank(message = "Title must not be empty")
@@ -13,6 +15,7 @@ public class Feedback {
         this.title = title;
         this.description = description;
     }
+
 
     public String getTitle() {
         return title;
