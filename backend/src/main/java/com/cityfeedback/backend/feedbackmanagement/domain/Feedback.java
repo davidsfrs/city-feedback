@@ -1,27 +1,39 @@
 package com.cityfeedback.backend.feedbackmanagement.domain;
 
-import jakarta.validation.constraints.NotBlank;
-
+import lombok.Getter;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
 public class Feedback {
 
-    @NotBlank(message = "Title must not be empty")
-    private String title;
+        private final UUID id;
+        private String titel;
+        private String beschreibung;
+        private LocalDateTime erstelltAm;
+        private LocalDateTime aktualisiertAm;
+        private String status;
 
-    private String description;
+        public Feedback(String titel, String beschreibung) {
+                this.id = UUID.randomUUID();
+                this.titel = titel;
+                this.beschreibung = beschreibung;
+                this.erstelltAm = LocalDateTime.now();
+                this.aktualisiertAm = this.erstelltAm;
+                this.status = "SUBMITTED";
+        }
 
-    public Feedback(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
+        public static Feedback createFeedback(String titel, String beschreibung) {
+                if (titel == null || titel.isBlank()) {
+                        throw new IllegalArgumentException(
+                                "Titel darf nicht leer sein"
+                        );
+                }
+                if (beschreibung == null || beschreibung.isBlank()) {
+                        throw new IllegalArgumentException(
+                                "Beschreibung darf nicht leer sein"
+                        );
+                }
+                return new Feedback(titel, beschreibung);
+        }
 }

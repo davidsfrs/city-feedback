@@ -8,107 +8,56 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FeedbackTest {
 
-    // 1. Create valid feedback
     @Test
     void shouldCreateFeedbackWithValidData() {
-        String title = "Broken streetlight";
-        String description = "The streetlight is not working.";
-        UUID citizenId = UUID.randomUUID();
-        UUID categoryId = UUID.randomUUID();
+        String title = "Kaputte Straßenlaterne";
+        String description = "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.";
 
-        Feedback feedback = Feedback.create(
+        Feedback feedback = Feedback.createFeedback(
                 title,
-                description,
-                citizenId,
-                categoryId
+                description
         );
 
         assertNotNull(feedback);
     }
 
-    // 2. Verify title and description
     @Test
     void shouldStoreTitleAndDescription() {
-        String title = "Broken streetlight";
-        String description = "The streetlight is not working.";
+        String title = "Kaputte Straßenlaterne";
+        String description = "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.";
 
-        Feedback feedback = Feedback.create(
+        Feedback feedback = Feedback.createFeedback(
                 title,
-                description,
-                UUID.randomUUID(),
-                UUID.randomUUID()
+                description
         );
 
-        assertEquals(title, feedback.getTitle());
-        assertEquals(description, feedback.getDescription());
+        assertEquals(title, feedback.getTitel());
+        assertEquals(description, feedback.getBeschreibung());
     }
 
-    // 3. Verify citizen and category
-    @Test
-    void shouldStoreCitizenAndCategoryIds() {
-        UUID citizenId = UUID.randomUUID();
-        UUID categoryId = UUID.randomUUID();
-
-        Feedback feedback = Feedback.create(
-                "Broken streetlight",
-                "The streetlight is not working.",
-                citizenId,
-                categoryId
-        );
-
-        assertEquals(citizenId, feedback.getCitizenId());
-        assertEquals(categoryId, feedback.getCategoryId());
-    }
 
     // 4. Verify automatic UUID generation
     @Test
     void shouldGenerateUuidAutomatically() {
-        Feedback feedback = Feedback.create(
-                "Broken streetlight",
-                "The streetlight is not working.",
-                UUID.randomUUID(),
-                UUID.randomUUID()
+        Feedback feedback = Feedback.createFeedback(
+                "Kaputte Straßenlaterne",
+                "as geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße."
         );
 
         assertNotNull(feedback.getId());
         assertInstanceOf(UUID.class, feedback.getId());
     }
 
-    // 5. Verify UUID uniqueness
-    @Test
-    void shouldGenerateDifferentIdsForDifferentFeedbacks() {
-        Feedback firstFeedback = Feedback.create(
-                "Broken streetlight",
-                "The streetlight is not working.",
-                UUID.randomUUID(),
-                UUID.randomUUID()
-        );
-
-        Feedback secondFeedback = Feedback.create(
-                "Damaged sidewalk",
-                "The sidewalk has several cracks.",
-                UUID.randomUUID(),
-                UUID.randomUUID()
-        );
-
-        assertNotEquals(
-                firstFeedback.getId(),
-                secondFeedback.getId()
-        );
-    }
-
     // 6. Verify initial status SUBMITTED
     @Test
     void shouldHaveSubmittedStatusAfterCreation() {
-        Feedback feedback = Feedback.create(
+        Feedback feedback = Feedback.createFeedback(
                 "Broken streetlight",
-                "The streetlight is not working.",
-                UUID.randomUUID(),
-                UUID.randomUUID()
+                "The streetlight is not working."
         );
 
         assertEquals(
-                FeedbackStatus.SUBMITTED,
+                "SUBMITTED",
                 feedback.getStatus()
         );
     }
@@ -118,11 +67,9 @@ class FeedbackTest {
     void shouldRejectNullTitle() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.create(
+                () -> Feedback.createFeedback(
                         null,
-                        "The streetlight is not working.",
-                        UUID.randomUUID(),
-                        UUID.randomUUID()
+                        "The streetlight is not working."
                 )
         );
     }
@@ -132,39 +79,36 @@ class FeedbackTest {
     void shouldRejectEmptyTitle() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.create(
+                () -> Feedback.createFeedback(
                         "",
-                        "The streetlight is not working.",
-                        UUID.randomUUID(),
-                        UUID.randomUUID()
+                        "The streetlight is not working."
                 )
         );
     }
+
+
 
     // 9. Reject blank title
     @Test
     void shouldRejectBlankTitle() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.create(
+                () -> Feedback.createFeedback(
                         "   ",
-                        "The streetlight is not working.",
-                        UUID.randomUUID(),
-                        UUID.randomUUID()
+                        "The streetlight is not working."
                 )
         );
     }
+
 
     // 10. Reject null description
     @Test
     void shouldRejectNullDescription() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.create(
+                () -> Feedback.createFeedback(
                         "Broken streetlight",
-                        null,
-                        UUID.randomUUID(),
-                        UUID.randomUUID()
+                        null
                 )
         );
     }
@@ -174,11 +118,9 @@ class FeedbackTest {
     void shouldRejectEmptyDescription() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.create(
+                () -> Feedback.createFeedback(
                         "Broken streetlight",
-                        "",
-                        UUID.randomUUID(),
-                        UUID.randomUUID()
+                        ""
                 )
         );
     }
@@ -188,40 +130,11 @@ class FeedbackTest {
     void shouldRejectBlankDescription() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.create(
+                () -> Feedback.createFeedback(
                         "Broken streetlight",
-                        "   ",
-                        UUID.randomUUID(),
-                        UUID.randomUUID()
+                        "   "
                 )
         );
     }
 
-    // 13. Reject null citizen ID
-    @Test
-    void shouldRejectNullCitizenId() {
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> Feedback.create(
-                        "Broken streetlight",
-                        "The streetlight is not working.",
-                        null,
-                        UUID.randomUUID()
-                )
-        );
-    }
-
-    // 14. Reject null category ID
-    @Test
-    void shouldRejectNullCategoryId() {
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> Feedback.create(
-                        "Broken streetlight",
-                        "The streetlight is not working.",
-                        UUID.randomUUID(),
-                        null
-                )
-        );
-    }
 }
