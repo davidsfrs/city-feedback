@@ -95,4 +95,72 @@ public class FeedbackRepositoryTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    void shouldUpdateExistingFeedback() {
+        InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
+        Feedback feedback = new Feedback("Titel", "Beschreibung");
+
+        repository.save(feedback);
+
+        feedback.changeStatus(FeedbackStatus.UNDER_REVIEW);
+        repository.save(feedback);
+
+        Feedback updatedFeedback = repository
+                .findById(feedback.getId())
+                .orElseThrow();
+
+        assertEquals(FeedbackStatus.UNDER_REVIEW, updatedFeedback.getStatus());
+    }
+
+    @Test
+    void shouldNotCreateDuplicateWhenUpdatingFeedback() {
+        InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
+        Feedback feedback = new Feedback("Titel", "Beschreibung");
+
+        repository.save(feedback);
+
+        feedback.changeStatus(FeedbackStatus.UNDER_REVIEW);
+        repository.save(feedback);
+
+        assertEquals(1, repository.findAll().size());
+    }
+
+    @Test
+    void shouldPreserveFeedbackIdWhenUpdatingFeedback() {
+        InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
+        Feedback feedback = new Feedback("Titel", "Beschreibung");
+
+        UUID originalId = feedback.getId();
+
+        repository.save(feedback);
+
+        feedback.changeStatus(FeedbackStatus.UNDER_REVIEW);
+        repository.save(feedback);
+
+        Feedback updatedFeedback = repository
+                .findById(originalId)
+                .orElseThrow();
+
+        assertEquals(originalId, updatedFeedback.getId());
+    }
+
+    @Test
+    void shouldReplaceExistingFeedbackWithSameId() {
+        InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
+        Feedback feedback = new Feedback("Titel", "Beschreibung");
+
+        repository.save(feedback);
+
+        feedback.changeStatus(FeedbackStatus.UNDER_REVIEW);
+        repository.save(feedback);
+
+        assertEquals(1, repository.findAll().size());
+        assertEquals(
+                FeedbackStatus.UNDER_REVIEW,
+                repository.findById(feedback.getId())
+                        .orElseThrow()
+                        .getStatus()
+        );
+    }
+
 }
