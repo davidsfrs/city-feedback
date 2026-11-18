@@ -1,8 +1,6 @@
 package com.cityfeedback.backend.feedbackmanagement.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class InMemoryFeedbackRepository implements FeedbackRepository {
 
@@ -13,7 +11,13 @@ public class InMemoryFeedbackRepository implements FeedbackRepository {
         feedbacks.put(feedback.getId(), feedback);
     }
 
-    public int getStoredFeedbackCount() {
-        return feedbacks.size();
+    @Override
+    public Optional<Feedback> findById(UUID id) {
+        return Optional.ofNullable(feedbacks.get(id));
+    }
+
+    @Override
+    public List<Feedback> findAll() {
+        return new ArrayList<>(feedbacks.values());
     }
 }
