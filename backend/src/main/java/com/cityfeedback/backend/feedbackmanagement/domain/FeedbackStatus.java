@@ -9,6 +9,9 @@ public enum FeedbackStatus {
     RESOLVED;
 
     public boolean canTransitionTo(FeedbackStatus newStatus) {
+        if (newStatus == null) {
+            return false;
+        }
 
         return switch (this) {
             case SUBMITTED ->

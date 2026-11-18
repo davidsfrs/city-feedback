@@ -36,4 +36,17 @@ public class Feedback {
                 }
                 return new Feedback(titel, beschreibung);
         }
+
+        public void changeStatus(FeedbackStatus newStatus) {
+
+                if (!status.canTransitionTo(newStatus)) {
+                        throw new IllegalStateException(
+                                "Invalid status transition from "
+                                        + status + " to " + newStatus
+                        );
+                }
+
+                this.status = newStatus;
+                this.aktualisiertAm = LocalDateTime.now();
+        }
 }
