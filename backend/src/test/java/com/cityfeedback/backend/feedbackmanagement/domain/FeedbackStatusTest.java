@@ -2,36 +2,78 @@ package com.cityfeedback.backend.feedbackmanagement.domain;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class FeedbackStatusTest {
 
     @Test
     void shouldHaveAllDefinedFeedbackStatuses() {
+        FeedbackStatus[] statuses = FeedbackStatus.values();
+
+        assertEquals(6, statuses.length);
+        assertNotNull(FeedbackStatus.valueOf("SUBMITTED"));
+        assertNotNull(FeedbackStatus.valueOf("UNDER_REVIEW"));
+        assertNotNull(FeedbackStatus.valueOf("ACCEPTED"));
+        assertNotNull(FeedbackStatus.valueOf("REJECTED"));
+        assertNotNull(FeedbackStatus.valueOf("IN_PROGRESS"));
+        assertNotNull(FeedbackStatus.valueOf("RESOLVED"));
     }
-    
+
     @Test
     void shouldInitializeFeedbackWithSubmittedStatus() {
+        Feedback feedback = Feedback.createFeedback(
+                "Defekte Straßenlaterne",
+                "Die Straßenlaterne funktioniert nicht."
+        );
+
+        assertEquals(FeedbackStatus.SUBMITTED, feedback.getStatus());
     }
 
     @Test
     void shouldAllowTransitionFromSubmittedToUnderReview() {
+        assertTrue(
+                FeedbackStatus.SUBMITTED.canTransitionTo(
+                        FeedbackStatus.UNDER_REVIEW
+                )
+        );
     }
 
     @Test
     void shouldAllowTransitionFromUnderReviewToAccepted() {
+        assertTrue(
+                FeedbackStatus.UNDER_REVIEW.canTransitionTo(
+                        FeedbackStatus.ACCEPTED
+                )
+        );
     }
 
     @Test
     void shouldAllowTransitionFromUnderReviewToRejected() {
+        assertTrue(
+                FeedbackStatus.UNDER_REVIEW.canTransitionTo(
+                        FeedbackStatus.REJECTED
+                )
+        );
     }
 
     @Test
     void shouldAllowTransitionFromAcceptedToInProgress() {
+        assertTrue(
+                FeedbackStatus.ACCEPTED.canTransitionTo(
+                        FeedbackStatus.IN_PROGRESS
+                )
+        );
     }
 
     @Test
     void shouldAllowTransitionFromInProgressToResolved() {
+        assertTrue(
+                FeedbackStatus.IN_PROGRESS.canTransitionTo(
+                        FeedbackStatus.RESOLVED
+                )
+        );
     }
-
+/*
     @Test
     void shouldRejectTransitionFromSubmittedToAccepted() {
     }
@@ -155,5 +197,5 @@ public class FeedbackStatusTest {
     @Test
     void shouldPreserveCurrentStatusOnInvalidTransition() {
     }
-
+*/
 }

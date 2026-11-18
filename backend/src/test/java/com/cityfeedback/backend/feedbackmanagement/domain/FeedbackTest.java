@@ -35,8 +35,6 @@ class FeedbackTest {
         assertEquals(description, feedback.getBeschreibung());
     }
 
-
-    // 4. Verify automatic UUID generation
     @Test
     void shouldGenerateUuidAutomatically() {
         Feedback feedback = Feedback.createFeedback(
@@ -48,7 +46,6 @@ class FeedbackTest {
         assertInstanceOf(UUID.class, feedback.getId());
     }
 
-    // 6. Verify initial status SUBMITTED
     @Test
     void shouldHaveSubmittedStatusAfterCreation() {
         Feedback feedback = Feedback.createFeedback(
@@ -57,12 +54,11 @@ class FeedbackTest {
         );
 
         assertEquals(
-                "SUBMITTED",
+                FeedbackStatus.SUBMITTED,
                 feedback.getStatus()
         );
     }
 
-    // 7. Reject null title
     @Test
     void shouldRejectNullTitle() {
         assertThrows(
@@ -74,7 +70,6 @@ class FeedbackTest {
         );
     }
 
-    // 8. Reject empty title
     @Test
     void shouldRejectEmptyTitle() {
         assertThrows(
@@ -86,9 +81,6 @@ class FeedbackTest {
         );
     }
 
-
-
-    // 9. Reject blank title
     @Test
     void shouldRejectBlankTitle() {
         assertThrows(
@@ -100,8 +92,6 @@ class FeedbackTest {
         );
     }
 
-
-    // 10. Reject null description
     @Test
     void shouldRejectNullDescription() {
         assertThrows(
@@ -113,7 +103,6 @@ class FeedbackTest {
         );
     }
 
-    // 11. Reject empty description
     @Test
     void shouldRejectEmptyDescription() {
         assertThrows(
@@ -125,7 +114,6 @@ class FeedbackTest {
         );
     }
 
-    // 12. Reject blank description
     @Test
     void shouldRejectBlankDescription() {
         assertThrows(

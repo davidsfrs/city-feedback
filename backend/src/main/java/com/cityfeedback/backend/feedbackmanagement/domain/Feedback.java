@@ -10,9 +10,9 @@ public class Feedback {
         private final UUID id;
         private String titel;
         private String beschreibung;
-        private LocalDateTime erstelltAm;
+        private final LocalDateTime erstelltAm;
         private LocalDateTime aktualisiertAm;
-        private String status;
+        private FeedbackStatus status;
 
         public Feedback(String titel, String beschreibung) {
                 this.id = UUID.randomUUID();
@@ -20,7 +20,7 @@ public class Feedback {
                 this.beschreibung = beschreibung;
                 this.erstelltAm = LocalDateTime.now();
                 this.aktualisiertAm = this.erstelltAm;
-                this.status = "SUBMITTED";
+                this.status = FeedbackStatus.SUBMITTED;
         }
 
         public static Feedback createFeedback(String titel, String beschreibung) {
