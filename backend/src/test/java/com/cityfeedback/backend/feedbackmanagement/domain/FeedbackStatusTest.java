@@ -3,6 +3,7 @@ package com.cityfeedback.backend.feedbackmanagement.domain;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,10 +24,9 @@ public class FeedbackStatusTest {
 
     @Test
     void shouldInitializeFeedbackWithSubmittedStatus() {
-        Feedback feedback = Feedback.createFeedback(
-                "Defekte Straßenlaterne",
-                "Die Straßenlaterne funktioniert nicht."
-        );
+        Feedback feedback = new Feedback("Kaputte Straßenlaterne",
+                "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+                UUID.randomUUID());
 
         assertEquals(FeedbackStatus.SUBMITTED, feedback.getStatus());
     }
@@ -217,7 +217,9 @@ public class FeedbackStatusTest {
 
     @Test
 void shouldUpdateModificationTimestampOnStatusChange() {
-    Feedback feedback = new Feedback("Titel", "Beschreibung");
+        Feedback feedback = new Feedback("Kaputte Straßenlaterne",
+                "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+                UUID.randomUUID());
 
     LocalDateTime originalTimestamp = feedback.getAktualisiertAm();
 
@@ -230,7 +232,9 @@ void shouldUpdateModificationTimestampOnStatusChange() {
 
 @Test
 void shouldNotUpdateModificationTimestampOnInvalidStatusChange() {
-    Feedback feedback = new Feedback("Titel", "Beschreibung");
+    Feedback feedback = new Feedback("Kaputte Straßenlaterne",
+            "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+            UUID.randomUUID());
 
     LocalDateTime originalTimestamp = feedback.getAktualisiertAm();
 
@@ -247,7 +251,9 @@ void shouldNotUpdateModificationTimestampOnInvalidStatusChange() {
 
 @Test
 void shouldPreserveCreationTimestampOnStatusChange() {
-    Feedback feedback = new Feedback("Titel", "Beschreibung");
+    Feedback feedback = new Feedback("Kaputte Straßenlaterne",
+            "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+            UUID.randomUUID());
 
     LocalDateTime originalCreationTimestamp = feedback.getErstelltAm();
 
@@ -261,7 +267,9 @@ void shouldPreserveCreationTimestampOnStatusChange() {
 
     @Test
     void shouldPreserveCurrentStatusOnInvalidTransition() {
-        Feedback feedback = new Feedback("Titel", "Beschreibung");
+        Feedback feedback = new Feedback("Kaputte Straßenlaterne",
+                "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+                UUID.randomUUID());
 
         FeedbackStatus originalStatus = feedback.getStatus();
 

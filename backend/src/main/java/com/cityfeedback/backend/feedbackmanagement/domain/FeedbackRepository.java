@@ -11,4 +11,6 @@ public interface FeedbackRepository {
     Optional<Feedback> findById(UUID id);
 
     List<Feedback> findAll();
+
+    List<Feedback> findByCitizenId(UUID citizenId);
 }

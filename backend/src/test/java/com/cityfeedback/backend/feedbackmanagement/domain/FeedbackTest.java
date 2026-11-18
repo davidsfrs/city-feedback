@@ -13,9 +13,10 @@ class FeedbackTest {
         String title = "Kaputte Straßenlaterne";
         String description = "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.";
 
-        Feedback feedback = Feedback.createFeedback(
+        Feedback feedback = new Feedback(
                 title,
-                description
+                description,
+                UUID.randomUUID()
         );
 
         assertNotNull(feedback);
@@ -26,9 +27,10 @@ class FeedbackTest {
         String title = "Kaputte Straßenlaterne";
         String description = "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.";
 
-        Feedback feedback = Feedback.createFeedback(
+        Feedback feedback = new Feedback(
                 title,
-                description
+                description,
+                UUID.randomUUID()
         );
 
         assertEquals(title, feedback.getTitel());
@@ -37,9 +39,13 @@ class FeedbackTest {
 
     @Test
     void shouldGenerateUuidAutomatically() {
-        Feedback feedback = Feedback.createFeedback(
-                "Kaputte Straßenlaterne",
-                "as geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße."
+        String title = "Kaputte Straßenlaterne";
+        String description = "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.";
+
+        Feedback feedback = new Feedback(
+                title,
+                description,
+                UUID.randomUUID()
         );
 
         assertNotNull(feedback.getId());
@@ -48,9 +54,13 @@ class FeedbackTest {
 
     @Test
     void shouldHaveSubmittedStatusAfterCreation() {
-        Feedback feedback = Feedback.createFeedback(
-                "Broken streetlight",
-                "The streetlight is not working."
+        String title = "Kaputte Straßenlaterne";
+        String description = "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.";
+
+        Feedback feedback = new Feedback(
+                title,
+                description,
+                UUID.randomUUID()
         );
 
         assertEquals(
@@ -63,9 +73,10 @@ class FeedbackTest {
     void shouldRejectNullTitle() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.createFeedback(
+                () -> new Feedback(
                         null,
-                        "The streetlight is not working."
+                        "The streetlight is not working.",
+                        UUID.randomUUID()
                 )
         );
     }
@@ -74,9 +85,10 @@ class FeedbackTest {
     void shouldRejectEmptyTitle() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.createFeedback(
+                () -> new Feedback(
                         "",
-                        "The streetlight is not working."
+                        "The streetlight is not working.",
+                        UUID.randomUUID()
                 )
         );
     }
@@ -85,9 +97,10 @@ class FeedbackTest {
     void shouldRejectBlankTitle() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.createFeedback(
+                () -> new Feedback(
                         "   ",
-                        "The streetlight is not working."
+                        "The streetlight is not working.",
+                        UUID.randomUUID()
                 )
         );
     }
@@ -96,9 +109,10 @@ class FeedbackTest {
     void shouldRejectNullDescription() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.createFeedback(
+                () -> new Feedback(
                         "Broken streetlight",
-                        null
+                        null,
+                        UUID.randomUUID()
                 )
         );
     }
@@ -107,9 +121,10 @@ class FeedbackTest {
     void shouldRejectEmptyDescription() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.createFeedback(
+                () -> new Feedback(
                         "Broken streetlight",
-                        ""
+                        "",
+                        UUID.randomUUID()
                 )
         );
     }
@@ -118,9 +133,10 @@ class FeedbackTest {
     void shouldRejectBlankDescription() {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> Feedback.createFeedback(
+                () -> new Feedback(
                         "Broken streetlight",
-                        "   "
+                        "   ",
+                        UUID.randomUUID()
                 )
         );
     }

@@ -20,4 +20,11 @@ public class InMemoryFeedbackRepository implements FeedbackRepository {
     public List<Feedback> findAll() {
         return new ArrayList<>(feedbacks.values());
     }
+
+    @Override
+    public List<Feedback> findByCitizenId(UUID citizenId) {
+        return feedbacks.values().stream()
+                .filter(feedback -> feedback.getCitizenId().equals(citizenId))
+                .toList();
+    }
 }
