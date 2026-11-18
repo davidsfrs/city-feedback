@@ -14,11 +14,13 @@ public class FeedbackRepositoryTest {
     void shouldSaveFeedback() {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
 
         repository.save(feedback);
@@ -32,9 +34,11 @@ public class FeedbackRepositoryTest {
 
         UUID citizenId1 = UUID.randomUUID();
         UUID citizenId2 = UUID.randomUUID();
+        UUID categoryId1 = UUID.randomUUID();
+        UUID categoryId2 = UUID.randomUUID();
 
-        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId1);
-        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId2);
+        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId1, categoryId1);
+        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId2, categoryId2);
 
         repository.save(feedback1);
         repository.save(feedback2);
@@ -46,11 +50,13 @@ public class FeedbackRepositoryTest {
     void shouldNotCreateDuplicateWhenSavingSameFeedbackTwice() {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
 
         repository.save(feedback);
@@ -63,11 +69,13 @@ public class FeedbackRepositoryTest {
     void shouldFindFeedbackById() {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
 
         repository.save(feedback);
@@ -95,9 +103,11 @@ public class FeedbackRepositoryTest {
 
         UUID citizenId1 = UUID.randomUUID();
         UUID citizenId2 = UUID.randomUUID();
+        UUID categoryId1 = UUID.randomUUID();
+        UUID categoryId2 = UUID.randomUUID();
 
-        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId1);
-        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId2);
+        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId1, categoryId1);
+        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId2, categoryId2);
 
         repository.save(feedback1);
         repository.save(feedback2);
@@ -123,11 +133,13 @@ public class FeedbackRepositoryTest {
     void shouldUpdateExistingFeedback() {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
 
         repository.save(feedback);
@@ -146,11 +158,13 @@ public class FeedbackRepositoryTest {
     void shouldNotCreateDuplicateWhenUpdatingFeedback() {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
 
         repository.save(feedback);
@@ -165,13 +179,14 @@ public class FeedbackRepositoryTest {
     void shouldPreserveFeedbackIdWhenUpdatingFeedback() {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
-
         UUID originalId = feedback.getId();
 
         repository.save(feedback);
@@ -190,11 +205,13 @@ public class FeedbackRepositoryTest {
     void shouldReplaceExistingFeedbackWithSameId() {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
 
         repository.save(feedback);
@@ -216,11 +233,13 @@ public class FeedbackRepositoryTest {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
 
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
         Feedback feedback = new Feedback(
                 "Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
-                citizenId
+                citizenId,
+                categoryId
         );
 
         repository.save(feedback);
@@ -237,9 +256,11 @@ public class FeedbackRepositoryTest {
 
         UUID citizenId1 = UUID.randomUUID();
         UUID citizenId2 = UUID.randomUUID();
+        UUID categoryId1 = UUID.randomUUID();
+        UUID categoryId2 = UUID.randomUUID();
 
-        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId1);
-        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId2);
+        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId1, categoryId1);
+        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId2, categoryId2);
 
         repository.save(feedback1);
         repository.save(feedback2);
@@ -268,9 +289,10 @@ public class FeedbackRepositoryTest {
         InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
 
         UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
 
-        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId);
-        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId);
+        Feedback feedback1 = new Feedback("Titel 1", "Beschreibung 1", citizenId, categoryId);
+        Feedback feedback2 = new Feedback("Titel 2", "Beschreibung 2", citizenId, categoryId);
 
         repository.save(feedback1);
         repository.save(feedback2);

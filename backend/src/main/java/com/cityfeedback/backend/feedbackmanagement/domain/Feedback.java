@@ -15,8 +15,9 @@ public class Feedback {
         private LocalDateTime aktualisiertAm;
         private FeedbackStatus status;
         private final UUID citizenId;
+        private final UUID categoryId;
 
-        public Feedback(String titel, String beschreibung, UUID citizenId) {
+        public Feedback(String titel, String beschreibung, UUID citizenId, UUID categoryId) {
 
                 if (titel == null || titel.isBlank()) {
                         throw new IllegalArgumentException(
@@ -36,11 +37,15 @@ public class Feedback {
                         );
                 }
 
+                if (categoryId == null) {
+                        throw new IllegalArgumentException("Category ID must not be null");
+                }
 
                 this.id = UUID.randomUUID();
                 this.titel = titel;
                 this.beschreibung = beschreibung;
                 this.citizenId = citizenId;
+                this.categoryId = categoryId;
                 this.erstelltAm = LocalDateTime.now();
                 this.aktualisiertAm = this.erstelltAm;
                 this.status = FeedbackStatus.SUBMITTED;

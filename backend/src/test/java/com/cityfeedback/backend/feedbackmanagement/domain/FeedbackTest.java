@@ -16,6 +16,7 @@ class FeedbackTest {
         Feedback feedback = new Feedback(
                 title,
                 description,
+                UUID.randomUUID(),
                 UUID.randomUUID()
         );
 
@@ -30,6 +31,7 @@ class FeedbackTest {
         Feedback feedback = new Feedback(
                 title,
                 description,
+                UUID.randomUUID(),
                 UUID.randomUUID()
         );
 
@@ -45,6 +47,7 @@ class FeedbackTest {
         Feedback feedback = new Feedback(
                 title,
                 description,
+                UUID.randomUUID(),
                 UUID.randomUUID()
         );
 
@@ -60,6 +63,7 @@ class FeedbackTest {
         Feedback feedback = new Feedback(
                 title,
                 description,
+                UUID.randomUUID(),
                 UUID.randomUUID()
         );
 
@@ -76,6 +80,7 @@ class FeedbackTest {
                 () -> new Feedback(
                         null,
                         "The streetlight is not working.",
+                        UUID.randomUUID(),
                         UUID.randomUUID()
                 )
         );
@@ -88,6 +93,7 @@ class FeedbackTest {
                 () -> new Feedback(
                         "",
                         "The streetlight is not working.",
+                        UUID.randomUUID(),
                         UUID.randomUUID()
                 )
         );
@@ -100,6 +106,7 @@ class FeedbackTest {
                 () -> new Feedback(
                         "   ",
                         "The streetlight is not working.",
+                        UUID.randomUUID(),
                         UUID.randomUUID()
                 )
         );
@@ -112,6 +119,7 @@ class FeedbackTest {
                 () -> new Feedback(
                         "Broken streetlight",
                         null,
+                        UUID.randomUUID(),
                         UUID.randomUUID()
                 )
         );
@@ -124,6 +132,7 @@ class FeedbackTest {
                 () -> new Feedback(
                         "Broken streetlight",
                         "",
+                        UUID.randomUUID(),
                         UUID.randomUUID()
                 )
         );
@@ -136,7 +145,38 @@ class FeedbackTest {
                 () -> new Feedback(
                         "Broken streetlight",
                         "   ",
+                        UUID.randomUUID(),
                         UUID.randomUUID()
+                )
+        );
+    }
+
+    @Test
+    void shouldStoreCategoryId() {
+        UUID citizenId = UUID.randomUUID();
+        UUID categoryId = UUID.randomUUID();
+
+        Feedback feedback = new Feedback(
+                "Titel",
+                "Beschreibung",
+                citizenId,
+                categoryId
+        );
+
+        assertEquals(categoryId, feedback.getCategoryId());
+    }
+
+    @Test
+    void shouldRejectNullCategoryId() {
+        UUID citizenId = UUID.randomUUID();
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Feedback(
+                        "Titel",
+                        "Beschreibung",
+                        citizenId,
+                        null
                 )
         );
     }

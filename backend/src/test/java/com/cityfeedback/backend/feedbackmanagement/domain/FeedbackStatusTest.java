@@ -26,6 +26,7 @@ public class FeedbackStatusTest {
     void shouldInitializeFeedbackWithSubmittedStatus() {
         Feedback feedback = new Feedback("Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+                UUID.randomUUID(),
                 UUID.randomUUID());
 
         assertEquals(FeedbackStatus.SUBMITTED, feedback.getStatus());
@@ -219,6 +220,7 @@ public class FeedbackStatusTest {
 void shouldUpdateModificationTimestampOnStatusChange() {
         Feedback feedback = new Feedback("Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+                UUID.randomUUID(),
                 UUID.randomUUID());
 
     LocalDateTime originalTimestamp = feedback.getAktualisiertAm();
@@ -234,6 +236,7 @@ void shouldUpdateModificationTimestampOnStatusChange() {
 void shouldNotUpdateModificationTimestampOnInvalidStatusChange() {
     Feedback feedback = new Feedback("Kaputte Straßenlaterne",
             "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+            UUID.randomUUID(),
             UUID.randomUUID());
 
     LocalDateTime originalTimestamp = feedback.getAktualisiertAm();
@@ -253,6 +256,7 @@ void shouldNotUpdateModificationTimestampOnInvalidStatusChange() {
 void shouldPreserveCreationTimestampOnStatusChange() {
     Feedback feedback = new Feedback("Kaputte Straßenlaterne",
             "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+            UUID.randomUUID(),
             UUID.randomUUID());
 
     LocalDateTime originalCreationTimestamp = feedback.getErstelltAm();
@@ -269,6 +273,7 @@ void shouldPreserveCreationTimestampOnStatusChange() {
     void shouldPreserveCurrentStatusOnInvalidTransition() {
         Feedback feedback = new Feedback("Kaputte Straßenlaterne",
                 "Das geht jetzt schon seit Monaten so. Weserstraße, Ecke Pannierstraße.",
+                UUID.randomUUID(),
                 UUID.randomUUID());
 
         FeedbackStatus originalStatus = feedback.getStatus();
