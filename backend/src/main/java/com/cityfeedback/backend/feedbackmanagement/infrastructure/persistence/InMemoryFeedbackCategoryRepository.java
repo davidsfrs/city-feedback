@@ -16,6 +16,12 @@ public class InMemoryFeedbackCategoryRepository
 
     @Override
     public void save(FeedbackCategory category) {
+        if (category == null) {
+            throw new IllegalArgumentException(
+                    "Feedback category must not be null"
+            );
+        }
+
         categories.put(category.getCategoryId(), category);
     }
 

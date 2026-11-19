@@ -5,6 +5,7 @@ import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategoryReposi
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,4 +37,34 @@ class InMemoryFeedbackCategoryRepositoryTest {
                 result.get().getDescription()
         );
     }
+
+
+    @Test
+    void shouldReturnEmptyForUnknownCategoryId() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        UUID unknownId = UUID.randomUUID();
+
+        // Act
+        Optional<FeedbackCategory> result =
+                repository.findById(unknownId);
+
+        // Assert
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void shouldRejectNullCategory() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                repository.save(null)
+        );
+    }
+
 }
