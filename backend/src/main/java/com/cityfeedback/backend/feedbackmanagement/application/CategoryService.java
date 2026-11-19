@@ -46,5 +46,22 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+
+    public void deactivateCategory(UUID categoryId) {
+        FeedbackCategory category = getCategoryById(categoryId);
+
+        category.deactivate();
+
+        categoryRepository.save(category);
+    }
+
+    public void activateCategory(UUID categoryId) {
+        FeedbackCategory category = getCategoryById(categoryId);
+
+        category.activate();
+
+        categoryRepository.save(category);
+    }
+
 }
 

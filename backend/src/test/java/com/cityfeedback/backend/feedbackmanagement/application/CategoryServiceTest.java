@@ -127,4 +127,59 @@ class CategoryServiceTest {
         assertTrue(categories.contains(secondCategory));
     }
 
+    @Test
+    void shouldDeactivateCategory() {
+        // Arrange
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        categoryRepository.save(category);
+
+        // Act
+        categoryService.deactivateCategory(category.getCategoryId());
+
+        // Assert
+        FeedbackCategory updatedCategory = categoryRepository
+                .findById(category.getCategoryId())
+                .orElseThrow();
+
+        assertFalse(updatedCategory.isActive());
+    }
+
+    @Test
+    void shouldReactivateCategory() {
+        // Arrange
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        category.deactivate();
+        categoryRepository.save(category);
+
+        // Act
+        categoryService.activateCategory(category.getCategoryId());
+
+        // Assert
+        FeedbackCategory updatedCategory = categoryRepository
+                .findById(category.getCategoryId())
+                .orElseThrow();
+
+        assertTrue(updatedCategory.isActive());
+    }
+
+    @Test
+    void shouldRejectDeactivationOfUnknownCategory() {
+        // Arrange
+        UUID unknownId = UUID.randomUUID();
+
+        // Act & Assert
+        assertThrows(NoSuchElementException.class, () ->
+                categoryService.deactivateCategory(unknownId)
+        );
+    }
+
+
 }
