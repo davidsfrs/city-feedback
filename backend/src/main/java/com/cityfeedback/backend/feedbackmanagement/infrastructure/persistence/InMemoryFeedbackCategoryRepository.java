@@ -22,6 +22,21 @@ public class InMemoryFeedbackCategoryRepository
             );
         }
 
+        boolean nameAlreadyExists = categories.values()
+                .stream()
+                .anyMatch(existingCategory ->
+                        existingCategory.getName()
+                                .equalsIgnoreCase(category.getName())
+                                && !existingCategory.getCategoryId()
+                                .equals(category.getCategoryId())
+                );
+
+        if (nameAlreadyExists) {
+            throw new IllegalArgumentException(
+                    "Category name already exists"
+            );
+        }
+
         categories.put(category.getCategoryId(), category);
     }
 

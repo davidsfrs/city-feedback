@@ -67,4 +67,75 @@ class InMemoryFeedbackCategoryRepositoryTest {
         );
     }
 
+
+    @Test
+    void shouldRejectDuplicateCategoryName() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        FeedbackCategory firstCategory = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        FeedbackCategory secondCategory = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about public infrastructure"
+        );
+
+        repository.save(firstCategory);
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                repository.save(secondCategory)
+        );
+    }
+
+
+    @Test
+    void shouldRejectDuplicateNameIgnoringCase() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        FeedbackCategory firstCategory = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        FeedbackCategory secondCategory = new FeedbackCategory(
+                "infrastructure",
+                "Feedback about public infrastructure"
+        );
+
+        repository.save(firstCategory);
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                repository.save(secondCategory)
+        );
+    }
+
+
+    @Test
+    void shouldAllowSavingSameCategoryAgain() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        repository.save(category);
+
+        // Act & Assert
+        assertDoesNotThrow(() ->
+                repository.save(category)
+        );
+    }
+
+
 }
