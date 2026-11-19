@@ -1,5 +1,6 @@
 package com.cityfeedback.backend.feedbackmanagement.domain;
 
+import com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence.InMemoryFeedbackRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -302,6 +303,18 @@ public class FeedbackRepositoryTest {
         assertEquals(2, result.size());
         assertTrue(result.contains(feedback1));
         assertTrue(result.contains(feedback2));
+    }
+
+    @Test
+    void shouldRejectNullFeedbackWhenSaving() {
+        InMemoryFeedbackRepository repository = new InMemoryFeedbackRepository();
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> repository.save(null)
+        );
+
+        assertTrue(repository.findAll().isEmpty());
     }
 
 }

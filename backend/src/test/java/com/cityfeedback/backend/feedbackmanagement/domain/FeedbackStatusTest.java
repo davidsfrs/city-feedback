@@ -223,12 +223,12 @@ void shouldUpdateModificationTimestampOnStatusChange() {
                 UUID.randomUUID(),
                 UUID.randomUUID());
 
-    LocalDateTime originalTimestamp = feedback.getAktualisiertAm();
+    LocalDateTime originalTimestamp = feedback.getUpdatedAt();
 
     feedback.changeStatus(FeedbackStatus.UNDER_REVIEW);
 
     assertFalse(
-        feedback.getAktualisiertAm().isBefore(originalTimestamp)
+        feedback.getUpdatedAt().isBefore(originalTimestamp)
     );
 }
 
@@ -239,7 +239,7 @@ void shouldNotUpdateModificationTimestampOnInvalidStatusChange() {
             UUID.randomUUID(),
             UUID.randomUUID());
 
-    LocalDateTime originalTimestamp = feedback.getAktualisiertAm();
+    LocalDateTime originalTimestamp = feedback.getUpdatedAt();
 
     assertThrows(
         IllegalStateException.class,
@@ -248,7 +248,7 @@ void shouldNotUpdateModificationTimestampOnInvalidStatusChange() {
 
     assertEquals(
         originalTimestamp,
-        feedback.getAktualisiertAm()
+        feedback.getUpdatedAt()
     );
 }
 
@@ -259,13 +259,13 @@ void shouldPreserveCreationTimestampOnStatusChange() {
             UUID.randomUUID(),
             UUID.randomUUID());
 
-    LocalDateTime originalCreationTimestamp = feedback.getErstelltAm();
+    LocalDateTime originalCreationTimestamp = feedback.getCreatedAt();
 
     feedback.changeStatus(FeedbackStatus.UNDER_REVIEW);
 
     assertEquals(
         originalCreationTimestamp,
-        feedback.getErstelltAm()
+        feedback.getCreatedAt()
     );
 }
 

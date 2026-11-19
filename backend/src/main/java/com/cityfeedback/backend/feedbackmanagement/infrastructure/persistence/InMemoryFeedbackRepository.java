@@ -1,4 +1,7 @@
-package com.cityfeedback.backend.feedbackmanagement.domain;
+package com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence;
+
+import com.cityfeedback.backend.feedbackmanagement.domain.Feedback;
+import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackRepository;
 
 import java.util.*;
 
@@ -8,6 +11,10 @@ public class InMemoryFeedbackRepository implements FeedbackRepository {
 
     @Override
     public void save(Feedback feedback) {
+        if (feedback == null) {
+            throw new IllegalArgumentException("Feedback must not be null");
+        }
+
         feedbacks.put(feedback.getId(), feedback);
     }
 

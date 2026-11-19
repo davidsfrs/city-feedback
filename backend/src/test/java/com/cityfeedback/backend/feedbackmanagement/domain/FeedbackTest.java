@@ -35,8 +35,8 @@ class FeedbackTest {
                 UUID.randomUUID()
         );
 
-        assertEquals(title, feedback.getTitel());
-        assertEquals(description, feedback.getBeschreibung());
+        assertEquals(title, feedback.getTitle());
+        assertEquals(description, feedback.getDescription());
     }
 
     @Test
@@ -177,6 +177,19 @@ class FeedbackTest {
                         "Beschreibung",
                         citizenId,
                         null
+                )
+        );
+    }
+
+    @Test
+    void shouldRejectNullCitizenId() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Feedback(
+                        "Titel",
+                        "Beschreibung",
+                        null,
+                        UUID.randomUUID()
                 )
         );
     }

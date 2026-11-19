@@ -9,23 +9,23 @@ public class Feedback {
 
 
         private final UUID id;
-        private String titel;
-        private String beschreibung;
-        private final LocalDateTime erstelltAm;
-        private LocalDateTime aktualisiertAm;
+        private String title;
+        private String description;
+        private final LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
         private FeedbackStatus status;
         private final UUID citizenId;
         private final UUID categoryId;
 
-        public Feedback(String titel, String beschreibung, UUID citizenId, UUID categoryId) {
+        public Feedback(String title, String description, UUID citizenId, UUID categoryId) {
 
-                if (titel == null || titel.isBlank()) {
+                if (title == null || title.isBlank()) {
                         throw new IllegalArgumentException(
                                 "Titel must not be null or blank"
                         );
                 }
 
-                if (beschreibung == null || beschreibung.isBlank()) {
+                if (description == null || description.isBlank()) {
                         throw new IllegalArgumentException(
                                 "Beschreibung must not be null or blank"
                         );
@@ -42,12 +42,12 @@ public class Feedback {
                 }
 
                 this.id = UUID.randomUUID();
-                this.titel = titel;
-                this.beschreibung = beschreibung;
+                this.title = title;
+                this.description = description;
                 this.citizenId = citizenId;
                 this.categoryId = categoryId;
-                this.erstelltAm = LocalDateTime.now();
-                this.aktualisiertAm = this.erstelltAm;
+                this.createdAt = LocalDateTime.now();
+                this.updatedAt = this.createdAt;
                 this.status = FeedbackStatus.SUBMITTED;
         }
 
@@ -61,6 +61,6 @@ public class Feedback {
                 }
 
                 this.status = newStatus;
-                this.aktualisiertAm = LocalDateTime.now();
+                this.updatedAt = LocalDateTime.now();
         }
 }
