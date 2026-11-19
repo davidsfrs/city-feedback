@@ -1,5 +1,7 @@
 package com.cityfeedback.backend.feedbackmanagement.domain;
 
+import com.cityfeedback.backend.feedbackmanagement.domain.Feedback;
+import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackStatus;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

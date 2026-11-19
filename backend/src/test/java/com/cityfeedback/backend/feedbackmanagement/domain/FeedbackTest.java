@@ -1,5 +1,8 @@
 package com.cityfeedback.backend.feedbackmanagement.domain;
 
+import com.cityfeedback.backend.feedbackmanagement.domain.Feedback;
+import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackStatus;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
@@ -67,7 +70,7 @@ class FeedbackTest {
                 UUID.randomUUID()
         );
 
-        assertEquals(
+        Assertions.assertEquals(
                 FeedbackStatus.SUBMITTED,
                 feedback.getStatus()
         );
