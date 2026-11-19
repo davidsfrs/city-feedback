@@ -1,5 +1,7 @@
-package com.cityfeedback.backend.feedbackmanagement.domain;
+package com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence;
 
+import com.cityfeedback.backend.feedbackmanagement.domain.Feedback;
+import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackStatus;
 import com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence.InMemoryFeedbackRepository;
 import org.junit.jupiter.api.Test;
 
