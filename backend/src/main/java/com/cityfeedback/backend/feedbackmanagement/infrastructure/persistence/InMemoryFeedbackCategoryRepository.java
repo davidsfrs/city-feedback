@@ -3,10 +3,7 @@ package com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence;
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategory;
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategoryRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class InMemoryFeedbackCategoryRepository
         implements FeedbackCategoryRepository {
@@ -44,5 +41,12 @@ public class InMemoryFeedbackCategoryRepository
     public Optional<FeedbackCategory> findById(UUID id) {
         return Optional.ofNullable(categories.get(id));
     }
+
+
+    @Override
+    public List<FeedbackCategory> findAll() {
+        return List.copyOf(categories.values());
+    }
+
 }
 

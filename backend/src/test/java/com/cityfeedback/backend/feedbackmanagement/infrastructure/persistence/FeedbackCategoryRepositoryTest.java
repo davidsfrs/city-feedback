@@ -4,6 +4,7 @@ import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategory;
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategoryRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -136,6 +137,75 @@ class InMemoryFeedbackCategoryRepositoryTest {
                 repository.save(category)
         );
     }
+
+
+    @Test
+    void shouldReturnAllSavedCategories() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        FeedbackCategory firstCategory = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        FeedbackCategory secondCategory = new FeedbackCategory(
+                "Environment",
+                "Feedback about environmental issues"
+        );
+
+        repository.save(firstCategory);
+        repository.save(secondCategory);
+
+        // Act
+        List<FeedbackCategory> categories = repository.findAll();
+
+        // Assert
+        assertEquals(2, categories.size());
+        assertTrue(categories.contains(firstCategory));
+        assertTrue(categories.contains(secondCategory));
+    }
+
+
+    @Test
+    void shouldReturnEmptyListWhenRepositoryIsEmpty() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        // Act
+        List<FeedbackCategory> categories = repository.findAll();
+
+        // Assert
+        assertNotNull(categories);
+        assertTrue(categories.isEmpty());
+    }
+
+
+    @Test
+    void shouldReturnUnmodifiableCategoryList() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        repository.save(category);
+
+        List<FeedbackCategory> categories = repository.findAll();
+
+        // Act & Assert
+        assertThrows(UnsupportedOperationException.class, () ->
+                categories.clear()
+        );
+
+        assertEquals(1, repository.findAll().size());
+    }
+
 
 
 }
