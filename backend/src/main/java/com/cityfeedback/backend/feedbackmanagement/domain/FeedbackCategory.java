@@ -10,6 +10,13 @@ public class FeedbackCategory {
     private final UUID id;
 
     public FeedbackCategory(String name, String description) {
+
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Category name must not be null or blank"
+            );
+        }
+
         this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;

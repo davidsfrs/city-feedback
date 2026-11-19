@@ -57,4 +57,42 @@ class FeedbackCategoryTest {
         );
     }
 
+
+    @Test
+    void shouldRejectNullName() {
+        // Arrange
+        String name = null;
+        String description = "Feedback about infrastructure";
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new FeedbackCategory(name, description)
+        );
+    }
+
+    @Test
+    void shouldRejectEmptyName() {
+        // Arrange
+        String name = "";
+        String description = "Feedback about infrastructure";
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new FeedbackCategory(name, description)
+        );
+    }
+
+    @Test
+    void shouldRejectBlankName() {
+        // Arrange
+        String name = "   ";
+        String description = "Feedback about infrastructure";
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new FeedbackCategory(name, description)
+        );
+    }
+
+
 }
