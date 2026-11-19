@@ -177,4 +177,35 @@ class FeedbackCategoryTest {
     }
 
 
+    @Test
+    void shouldAllowActiveCategoryForNewFeedback() {
+        // Arrange
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about infrastructure"
+        );
+
+        // Act & Assert
+        assertDoesNotThrow(
+                category::validateUsableForNewFeedback
+        );
+    }
+
+    @Test
+    void shouldRejectInactiveCategoryForNewFeedback() {
+        // Arrange
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about infrastructure"
+        );
+
+        category.deactivate();
+
+        // Act & Assert
+        assertThrows(IllegalStateException.class,
+                category::validateUsableForNewFeedback
+        );
+    }
+
+
 }

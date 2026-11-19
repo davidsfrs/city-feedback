@@ -42,6 +42,16 @@ public class FeedbackCategory {
         this.active = true;
     }
 
+
+    public void validateUsableForNewFeedback() {
+        if (!active) {
+            throw new IllegalStateException(
+                    "Inactive category cannot be used for new feedback"
+            );
+        }
+    }
+
+
 }
 
 
