@@ -5,6 +5,10 @@ import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategoryReposi
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
+
 @Service
 public class CategoryService {
 
@@ -27,5 +31,20 @@ public class CategoryService {
 
         return category;
     }
+
+
+    public FeedbackCategory getCategoryById(UUID categoryId) {
+        return categoryRepository.findById(categoryId)
+                .orElseThrow(() ->
+                        new NoSuchElementException(
+                                "Category not found: " + categoryId
+                        )
+                );
+    }
+
+    public List<FeedbackCategory> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
 }
 

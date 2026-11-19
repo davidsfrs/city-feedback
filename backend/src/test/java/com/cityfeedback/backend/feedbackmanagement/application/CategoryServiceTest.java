@@ -7,6 +7,10 @@ import com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence.In
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CategoryServiceTest {
@@ -64,4 +68,63 @@ class CategoryServiceTest {
                 categoryService.createCategory(name, description)
         );
     }
+
+
+    @Test
+    void shouldGetCategoryById() {
+        // Arrange
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        categoryRepository.save(category);
+
+        // Act
+        FeedbackCategory result =
+                categoryService.getCategoryById(category.getCategoryId());
+
+        // Assert
+        assertEquals(category.getCategoryId(), result.getCategoryId());
+        assertEquals(category.getName(), result.getName());
+        assertEquals(category.getDescription(), result.getDescription());
+    }
+
+    @Test
+    void shouldThrowWhenCategoryDoesNotExist() {
+        // Arrange
+        UUID unknownId = UUID.randomUUID();
+
+        // Act & Assert
+        assertThrows(NoSuchElementException.class, () ->
+                categoryService.getCategoryById(unknownId)
+        );
+    }
+
+    @Test
+    void shouldGetAllCategories() {
+        // Arrange
+        FeedbackCategory firstCategory = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        FeedbackCategory secondCategory = new FeedbackCategory(
+                "Environment",
+                "Feedback about environmental issues"
+        );
+
+        categoryRepository.save(firstCategory);
+        categoryRepository.save(secondCategory);
+
+        // Act
+        List<FeedbackCategory> categories =
+                categoryService.getAllCategories();
+
+        // Assert
+        assertEquals(2, categories.size());
+        assertTrue(categories.contains(firstCategory));
+        assertTrue(categories.contains(secondCategory));
+    }
+
 }
