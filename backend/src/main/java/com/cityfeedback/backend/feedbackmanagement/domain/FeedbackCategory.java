@@ -17,6 +17,14 @@ public class FeedbackCategory {
             );
         }
 
+
+        if (description == null || description.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Category description must not be null or blank"
+            );
+        }
+
+
         this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;

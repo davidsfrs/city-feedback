@@ -95,4 +95,42 @@ class FeedbackCategoryTest {
     }
 
 
+    @Test
+    void shouldRejectNullDescription() {
+        // Arrange
+        String name = "Infrastructure";
+        String description = null;
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new FeedbackCategory(name, description)
+        );
+    }
+
+    @Test
+    void shouldRejectEmptyDescription() {
+        // Arrange
+        String name = "Infrastructure";
+        String description = "";
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new FeedbackCategory(name, description)
+        );
+    }
+
+    @Test
+    void shouldRejectBlankDescription() {
+        // Arrange
+        String name = "Infrastructure";
+        String description = "   ";
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                new FeedbackCategory(name, description)
+        );
+    }
+
+
+
 }
