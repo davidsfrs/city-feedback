@@ -2,9 +2,10 @@ package com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence;
 
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategory;
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategoryRepository;
-
+import org.springframework.stereotype.Repository;
 import java.util.*;
 
+@Repository
 public class InMemoryFeedbackCategoryRepository
         implements FeedbackCategoryRepository {
 

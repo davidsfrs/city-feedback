@@ -2,9 +2,8 @@ package com.cityfeedback.backend.feedbackmanagement.application;
 
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategory;
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategoryRepository;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -18,6 +17,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public FeedbackCategory createCategory(
             String name,
             String description
@@ -46,7 +46,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     public void deactivateCategory(UUID categoryId) {
         FeedbackCategory category = getCategoryById(categoryId);
 
@@ -55,6 +55,7 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public void activateCategory(UUID categoryId) {
         FeedbackCategory category = getCategoryById(categoryId);
 
