@@ -1,8 +1,7 @@
 package com.cityfeedback.backend.feedbackmanagement.domain;
 
-
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FeedbackCategoryTest {
@@ -34,7 +33,7 @@ class FeedbackCategoryTest {
         );
 
         // Assert
-        assertNotNull(category.getId());
+        assertNotNull(category.getCategoryId());
     }
 
     @Test
@@ -52,8 +51,8 @@ class FeedbackCategoryTest {
 
         // Assert
         assertNotEquals(
-                firstCategory.getId(),
-                secondCategory.getId()
+                firstCategory.getCategoryId(),
+                secondCategory.getCategoryId()
         );
     }
 
@@ -131,6 +130,51 @@ class FeedbackCategoryTest {
         );
     }
 
+
+    @Test
+    void shouldCreateCategoryAsActive() {
+        // Arrange & Act
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads and public infrastructure"
+        );
+
+        // Assert
+        assertTrue(category.isActive());
+    }
+
+
+    @Test
+    void shouldDeactivateCategory() {
+        // Arrange
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads and public infrastructure"
+        );
+
+        // Act
+        category.deactivate();
+
+        // Assert
+        assertFalse(category.isActive());
+    }
+
+    @Test
+    void shouldReactivateCategory() {
+        // Arrange
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads and public infrastructure"
+        );
+
+        category.deactivate();
+
+        // Act
+        category.activate();
+
+        // Assert
+        assertTrue(category.isActive());
+    }
 
 
 }

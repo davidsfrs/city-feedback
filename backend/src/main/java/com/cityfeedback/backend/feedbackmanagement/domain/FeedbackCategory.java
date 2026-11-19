@@ -1,13 +1,15 @@
 package com.cityfeedback.backend.feedbackmanagement.domain;
+
 import lombok.Getter;
 import java.util.UUID;
 
 
 @Getter
 public class FeedbackCategory {
+    private final UUID categoryId;
     private final String name;
     private final String description;
-    private final UUID id;
+    private boolean active;
 
     public FeedbackCategory(String name, String description) {
 
@@ -25,10 +27,21 @@ public class FeedbackCategory {
         }
 
 
-        this.id = UUID.randomUUID();
+        this.categoryId = UUID.randomUUID();
         this.name = name;
         this.description = description;
+        this.active = true;
     }
+
+
+    public void deactivate() {
+        this.active = false;
+    }
+
+    public void activate() {
+        this.active = true;
+    }
+
 }
 
 
