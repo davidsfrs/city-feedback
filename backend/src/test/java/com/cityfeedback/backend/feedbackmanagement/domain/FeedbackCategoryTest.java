@@ -207,5 +207,27 @@ class FeedbackCategoryTest {
         );
     }
 
+    @Test
+    void shouldTrimWhitespaceFromCategoryName() {
+        // Arrange & Act
+        FeedbackCategory category = new FeedbackCategory(
+                "  Infrastructure  ",
+                "Feedback about roads"
+        );
 
+        // Assert
+        assertEquals("Infrastructure", category.getName());
+    }
+
+    @Test
+    void shouldTrimWhitespaceFromCategoryDescription() {
+        // Arrange & Act
+        FeedbackCategory category = new FeedbackCategory(
+                "Infrastructure",
+                "  Feedback about roads  "
+        );
+
+        // Assert
+        assertEquals("Feedback about roads", category.getDescription());
+    }
 }

@@ -3,7 +3,7 @@ package com.cityfeedback.backend.feedbackmanagement.application;
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategory;
 import com.cityfeedback.backend.feedbackmanagement.domain.FeedbackCategoryRepository;
 import com.cityfeedback.backend.feedbackmanagement.infrastructure.persistence.InMemoryFeedbackCategoryRepository;
-import com.cityfeedback.backend.feedbackmanagement.infrastructure.security.CategoryMethodSecurityConfig;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import com.cityfeedback.backend.usermanagement.domain.UserRole;
 
 import org.junit.jupiter.api.AfterEach;
@@ -33,10 +33,7 @@ class CategoryServiceSecurityTest {
     void setUp() {
         context = new AnnotationConfigApplicationContext();
 
-        context.register(
-                CategoryMethodSecurityConfig.class,
-                TestConfig.class
-        );
+        context.register(TestConfig.class);
 
         context.refresh();
 
@@ -52,6 +49,7 @@ class CategoryServiceSecurityTest {
     }
 
     @Configuration
+    @EnableMethodSecurity
     static class TestConfig {
 
         @Bean
@@ -178,4 +176,3 @@ class CategoryServiceSecurityTest {
         assertTrue(category.isActive());
     }
 }
-

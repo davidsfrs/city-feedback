@@ -68,6 +68,17 @@ class InMemoryFeedbackCategoryRepositoryTest {
         );
     }
 
+    @Test
+    void shouldRejectNullCategoryId() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                repository.findById(null)
+        );
+    }
 
     @Test
     void shouldRejectDuplicateCategoryName() {
@@ -118,6 +129,29 @@ class InMemoryFeedbackCategoryRepositoryTest {
         );
     }
 
+    @Test
+    void shouldRejectDuplicateCategoryNameWithWhitespace() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        FeedbackCategory firstCategory = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        FeedbackCategory duplicateCategory = new FeedbackCategory(
+                "  Infrastructure  ",
+                "Another description"
+        );
+
+        repository.save(firstCategory);
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () ->
+                repository.save(duplicateCategory)
+        );
+    }
 
     @Test
     void shouldAllowSavingSameCategoryAgain() {
@@ -205,7 +239,4 @@ class InMemoryFeedbackCategoryRepositoryTest {
 
         assertEquals(1, repository.findAll().size());
     }
-
-
-
 }

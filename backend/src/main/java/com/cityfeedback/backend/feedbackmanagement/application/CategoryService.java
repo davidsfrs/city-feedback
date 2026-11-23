@@ -46,6 +46,13 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public List<FeedbackCategory> getActiveCategories() {
+        return categoryRepository.findAll()
+                .stream()
+                .filter(FeedbackCategory::isActive)
+                .toList();
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     public void deactivateCategory(UUID categoryId) {
         FeedbackCategory category = getCategoryById(categoryId);
@@ -63,6 +70,4 @@ public class CategoryService {
 
         categoryRepository.save(category);
     }
-
 }
-

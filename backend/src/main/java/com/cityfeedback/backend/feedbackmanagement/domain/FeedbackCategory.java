@@ -12,24 +12,16 @@ public class FeedbackCategory {
     private boolean active;
 
     public FeedbackCategory(String name, String description) {
-
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException(
-                    "Category name must not be null or blank"
-            );
+            throw new IllegalArgumentException("Category name must not be blank");
         }
-
-
         if (description == null || description.isBlank()) {
-            throw new IllegalArgumentException(
-                    "Category description must not be null or blank"
-            );
+            throw new IllegalArgumentException("Category description must not be blank");
         }
-
 
         this.categoryId = UUID.randomUUID();
-        this.name = name;
-        this.description = description;
+        this.name = name.trim();
+        this.description = description.trim();
         this.active = true;
     }
 
@@ -50,8 +42,6 @@ public class FeedbackCategory {
             );
         }
     }
-
-
 }
 
 

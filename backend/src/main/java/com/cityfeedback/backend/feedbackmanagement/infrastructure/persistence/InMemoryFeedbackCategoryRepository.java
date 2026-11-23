@@ -40,9 +40,14 @@ public class InMemoryFeedbackCategoryRepository
 
     @Override
     public Optional<FeedbackCategory> findById(UUID id) {
+        if (id == null) {
+            throw new IllegalArgumentException(
+                    "Category ID must not be null"
+            );
+        }
+
         return Optional.ofNullable(categories.get(id));
     }
-
 
     @Override
     public List<FeedbackCategory> findAll() {
@@ -50,4 +55,3 @@ public class InMemoryFeedbackCategoryRepository
     }
 
 }
-

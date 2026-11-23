@@ -181,5 +181,64 @@ class CategoryServiceTest {
         );
     }
 
+    @Test
+    void shouldReturnOnlyActiveCategories() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
 
+        CategoryService service = new CategoryService(repository);
+
+        FeedbackCategory activeCategory = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        FeedbackCategory inactiveCategory = new FeedbackCategory(
+                "Environment",
+                "Feedback about environmental issues"
+        );
+
+        inactiveCategory.deactivate();
+
+        repository.save(activeCategory);
+        repository.save(inactiveCategory);
+
+        // Act
+        List<FeedbackCategory> result = service.getActiveCategories();
+
+        // Assert
+        assertEquals(1, result.size());
+        assertEquals("Infrastructure", result.get(0).getName());
+    }
+
+    @Test
+    void shouldReturnAllCategoriesIncludingInactiveOnes() {
+        // Arrange
+        FeedbackCategoryRepository repository =
+                new InMemoryFeedbackCategoryRepository();
+
+        CategoryService service = new CategoryService(repository);
+
+        FeedbackCategory active = new FeedbackCategory(
+                "Infrastructure",
+                "Feedback about roads"
+        );
+
+        FeedbackCategory inactive = new FeedbackCategory(
+                "Environment",
+                "Environmental issues"
+        );
+
+        inactive.deactivate();
+
+        repository.save(active);
+        repository.save(inactive);
+
+        // Act
+        List<FeedbackCategory> result = service.getAllCategories();
+
+        // Assert
+        assertEquals(2, result.size());
+    }
 }
