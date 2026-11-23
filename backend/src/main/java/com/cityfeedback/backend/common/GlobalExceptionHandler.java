@@ -1,4 +1,4 @@
-package com.cityfeedback.backend.usermanagement.infrastructure.web;
+package com.cityfeedback.backend.common;
 
 import com.cityfeedback.backend.usermanagement.application.exception.EmailAlreadyRegisteredException;
 import com.cityfeedback.backend.usermanagement.application.exception.InvalidCredentialsException;
